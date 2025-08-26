@@ -1,0 +1,24 @@
+{
+  "name": "procedure-pdf",
+  "version": "1.0.0",
+  "description": "Generate PDF from Ingenium procedure",
+  "main": "test.js",
+  "scripts": {
+    "start": "node test.js"
+  },
+  "keywords": [
+    "Ingenium",
+    "PDF"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "axios": "0.19.2",
+    "file-url": "3.0.0",
+    "inquirer": "7.1.0",
+    "mustache": "4.0.1",
+    "moment": "2.25.3",
+    "htmlencode": "0.0.4",
+    "puppeteer": "3.0.4"
+  }
+}

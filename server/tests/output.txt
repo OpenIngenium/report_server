@@ -1,0 +1,12 @@
+
+First example
+
+<img src="https://s3-us-gov-west-1.amazonaws.com/ingenium-media-prod-psyche/2019-03-14/c31f646f-3c5d-4b79-81c8-283ec1f9de4f/1552580946903.png" style="width: 300px;" class="fr-fic fr-dib"><img src="https://s3-us-gov-west-1.amazonaws.com/ingenium-media-prod-psyche/2019-03-14/d31f646f-3c5d-4b79-81c8-283ec1f9de4f/2552580946903.png" style="width: 300px;" class="fr-fic fr-dib">  
+<img src="https://s3-us-gov-west-1.amazonaws.com/ingenium-media-prod-psyche/2019-03-14/f31f646f-3c5d-4b79-81c8-283ec1f9de4f/3552580946903.png" style="width: 300px;" class="fr-fic fr-dib">
+
+Second example
+
+<img data-fr-image-pasted="true" src="https://s3-us-gov-west-1.amazonaws.com/ingenium-media-prod-psyche/2020-06-04/7430d621-f564-49c1-8982-3d9dd45b6a83/Screen%20Shot%202020-06-04%20at%203.33.04%20PM.png" class="fr-fic fr-dii" style="width: 723px;">  <img data-fr-image-pasted="true" src="https://s3-us-gov-west-1.amazonaws.com/ingenium-media-prod-psyche/2020-06-04/8430d621-f564-49c1-8982-3d9dd45b6a83/Screen%20Shot%202020-06-04%20at%203.33.04%21PM.png" class="fr-fic fr-dii" style="width: 723px;">
+<img data-fr-image-pasted="true" src="https://s3-us-gov-west-1.amazonaws.com/ingenium-media-prod-psyche/2020-06-04/9430d621-f564-49c1-8982-3d9dd45b6a83/Screen%20Shot%202020-06-04%20at%203.33.04%21PM.png" class="fr-fic fr-dii" style="width: 723px;">
+
+End of example

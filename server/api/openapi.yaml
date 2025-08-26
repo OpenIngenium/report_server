@@ -1,0 +1,524 @@
+openapi: 3.0.0
+info:
+  license:
+    name: JPL
+  title: Ingenium report service
+  version: 1.0.0
+servers:
+- url: http://localhost:3003/api/v1
+security:
+- bearerAuth:
+  - basic
+paths:
+  /pdf/procedures/{procedure_id}/versions/{version}:
+    get:
+      operationId: pdf_procedure_get
+      parameters:
+      - description: The id of the procedure
+        explode: false
+        in: path
+        name: procedure_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: version the procedure
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: levels of table of contents. Use 0 for all levels (default).
+          Use -1 for no TOC.
+        explode: true
+        in: query
+        name: toc_level
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: include general comments. default is false.
+        explode: true
+        in: query
+        name: comment
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/pdf:
+              schema:
+                format: binary
+                type: string
+          description: pdf copy of procedure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      security:
+      - bearerAuth:
+        - basic
+      summary: Download procedure in PDF format
+      tags:
+      - PDF
+      x-openapi-router-controller: PDFController
+      x-openapi-router-service: PDFService
+  /pdf/executions/{execution_id}:
+    get:
+      operationId: pdf_execution_get
+      parameters:
+      - description: The id of the execution
+        explode: false
+        in: path
+        name: execution_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: levels of table of contents. Use 0 for all levels (default).
+          Use -1 for no TOC.
+        explode: true
+        in: query
+        name: toc_level
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: include general comments. default is false.
+        explode: true
+        in: query
+        name: comment
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: include activity report comments. default is false.
+        explode: true
+        in: query
+        name: activity_report_comment
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: include data review comments. default is false.
+        explode: true
+        in: query
+        name: data_review_comment
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: include all steps regardless of associated comments. default
+          is true.
+        explode: true
+        in: query
+        name: all_steps
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/pdf:
+              schema:
+                format: binary
+                type: string
+          description: pdf copy of as run
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      security:
+      - bearerAuth:
+        - basic
+      summary: Download As Run in PDF format
+      tags:
+      - PDF
+      x-openapi-router-controller: PDFController
+      x-openapi-router-service: PDFService
+  /executions:
+    get:
+      operationId: get_executions
+      parameters:
+        - name: format
+          in: query
+          description: File format requested for the data
+          required: true
+          schema:
+            type: string
+            enum:
+              - EXCEL
+        - name: execution_id
+          in: query
+          description: filter by execution_id
+          required: false
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: Query for words in description
+          required: false
+          schema:
+            type: string       
+        - name: status
+          in: query
+          description: Filter based on status
+          required: false
+          schema:
+            type: string
+            enum:
+              - RUNNING
+              - IDLE
+              - PAUSED
+              - HALTED
+              - SUSPENDED
+              - CLOSED
+              - IN_REVIEW
+              - FINALIZED
+        - name: completed
+          in: query
+          description: Get only completed or not completed executions
+          required: false
+          schema:
+            type: boolean 
+        - name: from_time
+          in: query
+          description: search from this time (execution start time in UTC such as 2021-01-07T02:56:23.877Z)
+          required: false
+          schema:
+            type: string
+        - name: to_time
+          in: query
+          description: search up to this time (execution start time in UTC such as 2021-01-07T02:56:23.877Z)
+          required: false
+          schema:
+            type: string
+        - name: venue_name
+          in: query
+          description: filter by venue name
+          required: false
+          schema:
+            type: string    
+        - name: venue_type
+          in: query
+          description: filter by venue type
+          required: false
+          schema:
+            type: string     
+            enum:
+              - WSTS
+              - Testbed
+              - ATLO
+              - Other
+        - name: run_for_score
+          in: query
+          description: filter by run for score flag
+          required: false
+          schema:
+            type: boolean
+        - name: test_conductor
+          in: query
+          description: filter by test_conductor
+          required: false
+          schema:
+            type: string              
+        - name: procedure_id
+          in: query
+          description: filter by procedure_id used in the execution
+          required: false
+          schema:
+            type: string
+        - name: version
+          in: query
+          description: filter by procedure version used in the execution. procedure_id must be specified.
+          required: false
+          schema:
+            type: integer 
+        - name: institutional_id    
+          in: query
+          description: filter by institutional id of procedure used in the execution
+          required: false
+          schema:
+            type: string
+        - name: institutional_release_id  
+          in: query
+          description: filter by institutional release id of procedure version used in the execution. institutional_id must be specified.
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "List of as runs in Excel"
+          content:
+            application/vnd.openxmlformats-officedocument.spreedsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      security:
+      - bearerAuth:
+        - basic
+      summary: Download a list of As Runs
+      tags:
+      - Executions
+      x-openapi-router-controller: ExecutionController
+      x-openapi-router-service: ExecutionService
+  
+  /difference_report:
+    get:
+      operationId: get_difference_report
+      parameters:
+        - name: base_type
+          in: query
+          description: Type of base procedure or execution
+          required: true
+          schema:
+            type: string
+            enum:
+              - PROCEDURE
+              - EXECUTION
+        - name: base_id
+          in: query
+          description: Id of the base procedure or execution
+          required: true
+          schema:
+            type: string
+        - name: base_version
+          in: query
+          description: Version of the base procedure. Only applicable for PROCEDURE.
+          required: false
+          schema:
+            type: integer
+        - name: target_type
+          in: query
+          description: Type of target procedure or execution
+          required: true
+          schema:
+            type: string
+            enum:
+              - PROCEDURE
+              - EXECUTION
+        - name: target_id
+          in: query
+          description: Id of the target procedure or execution
+          required: true
+          schema:
+            type: string
+        - name: target_version
+          in: query
+          description: Version of the target procedure. Only applicable for PROCEDURE.
+          required: false
+          schema:
+            type: integer
+      responses:
+        "202":
+          description: "Request was accepted"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_id:
+                    description: Unique ID of the report
+                    type: string
+                  message:
+                    description: Any status message
+                    type: string
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      security:
+      - bearerAuth:
+        - basic
+      summary: Request generation of a difference report between procedures and executions
+      tags:
+      - DifferenceReport
+      x-openapi-router-controller: DifferenceReportController
+      x-openapi-router-service: DifferenceReportService
+
+  /search_report:
+    post:
+      operationId: get_search_report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchInput'
+      responses:
+        "200":
+          description: "List of as search result in Excel"
+          content:
+            application/vnd.openxmlformats-officedocument.spreedsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      security:
+      - bearerAuth:
+        - basic
+      summary: Download a list of Search results
+      tags:
+      - Search
+      x-openapi-router-controller: SearchController
+      x-openapi-router-service: SearchService
+  
+  /health:
+    get:
+      operationId: health_get
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+          description: Received service status
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+      security:
+      - bearerAuth: []
+      tags:
+      - Health
+      x-openapi-router-controller: HealthController
+      x-openapi-router-service: HealthService
+components:
+  parameters:
+    procedure_id:
+      description: The id of the procedure
+      explode: false
+      in: path
+      name: procedure_id
+      required: true
+      schema:
+        type: string
+      style: simple
+    version:
+      description: version the procedure
+      explode: false
+      in: path
+      name: version
+      required: true
+      schema:
+        type: integer
+      style: simple
+    execution_id:
+      description: The id of the execution
+      explode: false
+      in: path
+      name: execution_id
+      required: true
+      schema:
+        type: string
+      style: simple
+    toc_level:
+      description: levels of table of contents. Use 0 for all levels (default). Use
+        -1 for no TOC.
+      explode: true
+      in: query
+      name: toc_level
+      required: false
+      schema:
+        type: integer
+      style: form
+    comment:
+      description: include general comments. default is false.
+      explode: true
+      in: query
+      name: comment
+      required: false
+      schema:
+        type: boolean
+      style: form
+    data_review_comment:
+      description: include data review comments. default is false.
+      explode: true
+      in: query
+      name: data_review_comment
+      required: false
+      schema:
+        type: boolean
+      style: form
+    activity_report_comment:
+      description: include activity report comments. default is false.
+      explode: true
+      in: query
+      name: activity_report_comment
+      required: false
+      schema:
+        type: boolean
+      style: form
+    all_steps:
+      description: include all steps regardless of associated comments. default is
+        true.
+      explode: true
+      in: query
+      name: all_steps
+      required: false
+      schema:
+        type: boolean
+      style: form
+  schemas:
+    ErrorResponse:
+      properties:
+        message:
+          description: short error message
+          type: string
+        details:
+          description: details about the error that may include stack trace
+          items:
+            type: string
+          type: array
+    HealthStatus:
+      example:
+        message: message
+        status: OK
+      properties:
+        status:
+          description: Current status of service
+          enum:
+          - OK
+          - ERROR
+          - UNKNOWN
+          type: string
+        message:
+          description: Any error message
+          type: string
+    SearchInput:
+      type: object
+      required:
+        - queryBuilderParams
+      properties:
+        queryBuilderParams:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http

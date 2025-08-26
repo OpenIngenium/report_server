@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{#PROCEDURE}}
+    <title>Procedure {{procedure_id}} Version: {{version}}</title>
+    {{/PROCEDURE}}
+    {{#EXECUTION}}
+    <title>As Run: {{execution_id}}</title>
+    {{/EXECUTION}}  
+  </head>
+  <body>      
+    {{#PROCEDURE}}
+    <h1>{{procedure_info.title}}</h1>
+    <p></p>      
+    <table class="ing-table ing-striped">
+    
+    <tr>
+    <td class="ing-label">Ingenium ID:</td>
+    <td>{{procedure_info.procedure_id}}</td>
+    </tr>    
+
+    <tr>
+    <td class="ing-label">Procedure Type:</td>
+    <td>{{procedure_info.procedure_type}}</td>
+    </tr>   
+
+    <tr>
+    <td class="ing-label">Hazardous</td>
+    <td>{{procedure_info.hazardous}}</td>
+    </tr> 
+
+    <tr>
+    <td class="ing-label">Labels</td>
+    <td class="ing-table-data">{{procedure_info.labels_str}}</td>
+    </tr> 
+    
+    <tr>
+    <td class="ing-label">Version:</td>
+    <td>{{version}}</td>
+    </tr>    
+    
+    <tr>
+    <td class="ing-label">URL:</td>
+    <td><a href="{{url}}">{{{url}}}</a></td>
+    </tr>        
+        
+    <tr>
+    <td class="ing-label">Institutional ID (PBAT #):</td>
+    <td>{{procedure_info.institutional_id}}</td>
+    </tr> 
+    
+    <tr>
+    <td class="ing-label">Institutional Revision ID (PBAT Revision):</td>
+    <td>{{procedure_version.institutional_release_id}}</td>
+    </tr>
+    
+    <tr>
+    <td class="ing-label">Status:</td>
+    <td>{{procedure_version.status}}</td>
+    </tr>
+
+    <tr>
+    <td class="ing-label">Available Tags:</td>
+    <td class="ing-table-data">{{procedure_version.tag_names_str}}</td>
+    </tr>
+    
+    <tr>
+    <td class="ing-label">Description:</td>
+    <td class="ing-table-data">{{procedure_info.description}}</td>
+    </tr>
+    
+    <tr>
+    <td class="ing-label">Author:</td>
+    <td>{{procedure_info.author}}</td>
+    </tr>       
+    
+    <tr>
+    <td class="ing-label">PDF File Generated On:</td>
+    <td>{{pdf_date}}</td>
+    </tr>          
+    
+    </table>
+    
+    <p>
+    NOTE: Paper copy of this procedure may not be current and should not be relied on for official information.
+    The current version is in PBAT at the following URL: 
+    <a href="https://ingenium-open.com">https://ingenium-open.com</a><!-- TO REPLACE: Update with your organization's URL -->
+    </p>   
+        
+    {{/PROCEDURE}}
+    
+    {{#EXECUTION}}
+    <h1>AS RUN: {{execution_info.description}}</h1>
+    <table class="ing-table ing-striped">
+    
+    <h2>Record</h2>
+    <tr>
+    <td class="ing-label">Ingenium ID:</td>
+    <td>{{execution_info.execution_id}}</td>
+    </tr>    
+    
+    <tr>
+    <td class="ing-label">URL:</td>
+    <td><a href="{{url}}">{{{url}}}</a></td>
+    </tr>        
+    
+    <tr>
+    <td class="ing-label">Parent Execution ID:</td>
+    <td>{{execution_info.parent_execution_id}}</td>
+    </tr> 
+
+    <tr>
+    <td class="ing-label">Parent Execution URL:</td>
+    <td><a href="{{parent_execution_url}}">{{{parent_execution_url}}}</a></td>
+    </tr> 
+
+    <tr>
+    <td class="ing-label">Test Venue:</td>
+    <td>{{execution_info.venue_name}}</td>
+    </tr>     
+    
+    <tr>
+    <td class="ing-label">Test Conductors:</td>
+    <td>
+    {{#execution_info.test_conductors}}
+    <div>{{.}}</div>
+    {{/execution_info.test_conductors}}
+    </td>
+    </tr>    
+    
+    <tr>
+    <td class="ing-label">Status:</td>
+    <td>{{execution_info.status}}</td>
+    </tr>    
+    
+    <tr>
+    <td class="ing-label">Time Started:</td>
+    <td>{{execution_info.time_started}}</td>
+    </tr>       
+    
+    <tr>
+    <td class="ing-label">Time Completed:</td>
+    <td>{{execution_info.time_completed}}</td>
+    </tr> 
+    
+    <tr>
+    <td class="ing-label">Duration:</td>
+    <td>{{execution_info.duration}}</td>
+    </tr>   
+    
+    <tr>
+    <td class="ing-label">Number of Steps Executed:</td>
+    <td>{{execution_info.num_steps_executed}}</td>
+    </tr>
+    
+    <tr>
+    <td class="ing-label">Number of Steps Passed:</td>
+    <td>{{execution_info.num_steps_passed}}</td>
+    </tr>
+    
+    <tr>
+    <td class="ing-label">Number of Steps Failed:</td>
+    <td>{{execution_info.num_steps_failed}}</td>
+    </tr>
+    
+    <tr>
+    <td class="ing-label">Number of Steps Errored:</td>
+    <td>{{execution_info.num_steps_errored}}</td>
+    </tr>
+
+    <tr>
+    <td class="ing-label">Ingenium Version:</td>
+    <td>{{execution_info.version}}</td>
+    </tr>
+        
+    <tr>
+    <td class="ing-label">PDF File Generated On:</td>
+    <td>{{pdf_date}}</td>
+    </tr>          
+    </table>
+    
+    <h2>Used Procedures</h2>
+    <table class="ing-table ing-striped">
+    <tr>
+    <th>Title</th>
+    <th>PBAT #</th>
+    <th>PBAT Revision</th>
+    <th>Procedure ID</th>
+    <th>Procedure Version</th>
+    <th>Run for Record</th>
+    <th>Version Status</th>
+    </tr> 
+    {{#used_procedures}}       
+    <tr>
+    <td>{{title}}</td>
+    <td>{{institutional_id}}</td>
+    <td>{{institutional_release_id}}</td>
+    <td>{{procedure_id}}</td>
+    <td>{{version}}</td>
+    <td>{{run_for_record}}</td>
+    <td>{{version_status}}</td>
+    </tr>
+    {{/used_procedures}}
+    </table>   
+    
+   <h2>Status History</h2>
+    <table class="ing-table ing-striped">
+    <tr>
+    <th>From Status</th>
+    <th>To Status</th>
+    <th>Time</th>
+    <th>User</th>
+    <th>Comments</th>
+    </tr> 
+    {{#execution_info.transitions}}       
+    <tr>
+    <td>{{from_status}}</td>
+    <td>{{to_status}}</td>
+    <td>{{time_updated}}</td>
+    <td>{{user_name}}</td>
+    <td>{{{comment}}}</td>
+    </tr>
+    {{/execution_info.transitions}}
+    </table>
+
+    <p>
+    NOTE: Paper copy of this AS RUN may not be current and should not be relied on for official information.
+    The current version is in PBAT at the following URL: 
+    <a href="https://ingenium-open.com">https://ingenium-open.com</a><!-- TO REPLACE: Update with your organization's URL -->
+    </p>  
+    
+    {{/EXECUTION}}
+    
+    <div style="page-break-before: always"></div>
+    
+    {{#PROCEDURE}}        
+    <h2>Revision History In Ingenium</h2>    
+    
+    <table class="ing-table ing-striped">
+    <tr>
+    <th>Version</th>
+    <th>Description</th>
+    <th>PBAT Revision</th>
+    <th>Status</th>
+    <th>Time</th>
+    </tr>
+    
+    {{#procedure_versions}}
+    <tr>
+    <td>{{version}}</td>
+    <td>{{version_description}}</td>
+    <td>{{institutional_release_id}}</td>
+    <td>{{status}}</td>
+    <td>{{time_versioned}}</td>
+    </tr>
+    {{/procedure_versions}}
+    </table>   
+    <div style="page-break-before: always"></div>
+    {{/PROCEDURE}}   
+    
+    <h2>Table of Contents</h2>
+    {{#elements}}
+    <div{{#DELETED}} class="ing-DELETED"{{/DELETED}} style="margin-left: calc({{depth}} * 10px);">
+      <a href="#{{elem_id}}" {{#procedure_modification.justification.modification_type}} class="toc-{{.}}" {{/procedure_modification.justification.modification_type}}>{{number}} : {{title}}</a>
+      {{#execution}}
+      <span class="margin-left-30 status-{{execution.meta_data.status}}">{{execution.meta_data.status}}</span>
+      {{/execution}}
+    </div>
+    {{/elements}}    
+    
+    {{#EXECUTION}}
+    {{#execution_info.activity_report_content.length}}
+    <div style="page-break-before: always"></div>
+    
+    <div class="activity-report-comment-head">
+      <h2>Activity Report Comments</h2>
+    </div>
+    <div class="ing-description">
+    <p class="froala-non-edit">
+      <div class="fr-view">
+        {{{execution_info.activity_report_content}}}
+      </div>
+    </p>
+    </div>
+
+    {{/execution_info.activity_report_content.length}}
+    
+    {{#execution_info.data_review_content.length}}
+    <div style="page-break-before: always"></div>
+    
+    <div class="data-review-comment-head">
+      <h2>Data Review Comments</h2>
+    </div>
+    <div class="ing-description">
+    <p class="froala-non-edit">
+      <div class="fr-view">
+        {{{execution_info.data_review_content}}}
+      </div>
+    </p>
+    </div>
+
+    {{/execution_info.data_review_content.length}}
+    
+    {{/EXECUTION}}
+    
+    
+    
+    <div style="page-break-before: always"></div>
+    
+    {{#elements}}
+    {{#is_section_like}}
+    <h2 class="ing-section-title" id="{{elem_id}}">
+    {{/is_section_like}}
+    {{#is_not_section_like}}
+    <h3 class="ing-step-title{{#DELETED}} ing-DELETED{{/DELETED}}" id="{{elem_id}}">
+    {{/is_not_section_like}}    
+    {{number}}: {{title}}
+    {{#prev_run}}
+    <span class="ing-step-old-run">
+    [PREVIOUS RUN #{{prev_run}}]
+    </span>
+    {{/prev_run}}    
+    {{#is_step_like}}
+    <span class="ing-step-deco">
+    <span class="ing-step-type">{{type_name}}</span>
+    {{#PROCEDURE}}
+    <span class="ing-step-signoff">&nbsp;</span>
+    {{/PROCEDURE}}
+    {{#execution}}
+    <span class="ing-step-signoff status-{{execution.meta_data.status}}">{{execution.meta_data.status}}</span>
+    {{/execution}}
+    </span>
+    {{/is_step_like}}
+    {{#is_section_like}}
+    </h2>
+    {{/is_section_like}}
+    {{#is_not_section_like}}
+    </h3>
+    {{/is_not_section_like}}  
+    
+    {{#tag_names.length}}
+    <div class="ing-step-tag">
+    {{#hazardous}}
+    <span class="ing-hazardous">HAZARDOUS</span>
+    {{/hazardous}}
+        
+    <span class="ing-step-tag-names">    
+    [{{tag_names_str}}]
+    </span>
+    </div>    
+    {{/tag_names.length}}    
+
+    {{#execution}}
+    {{#execution.meta_data.override_justification}}
+    <div style="display: flex; justify-content: flex-end;">
+    <div class="ing-step-time">
+    <span style="color:black"><b>Override Justification:</b> {{execution.meta_data.override_justification}}</span>
+    </div>
+    </div>
+    {{/execution.meta_data.override_justification}}
+    {{/execution}}
+    
+    {{#time_completed}}
+    <div style="display: flex; justify-content: flex-end;">
+    <div class="ing-step-time">
+    <span style="margin-right: 30px">Executed at: {{time_completed}}</span>
+    <span >By: {{test_conductor}}</span>
+    </div>
+    </div>
+    {{/time_completed}}
+    
+    <div class="ing-elem-content">  
+    
+    {{#description.length}}
+    <div class="ing-description">
+    <p class="froala-non-edit">
+      <div class="fr-view">
+        {{{description}}}
+      </div>
+    </p>
+    </div>
+    {{/description.length}}
+
+    {{! ---------------------------------------------------- }}    
+    {{#MANUAL_INPUT}}
+    <div class="ing-step-content">
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Condition</th>
+      <th>Value</th>
+      <th>Status</th>
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{name}}</td>
+      <td>{{type}}</td>
+      <td>{{{condition}}}</td>
+      <td class="actual-value"><div class="ing-step-input">{{actual_value}}</div></td>
+      <td>{{verification_status}}</td>    
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/MANUAL_INPUT}}
+    {{! ---------------------------------------------------- }}    
+    {{#MANUAL_EIP}}
+    <div class="ing-step-content" style="font-size:11px; line-height:30px">
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Signal Name</th>
+      <th>Function Number (ECDS)</th>
+      <th>From (red probe)</th>
+      <th>To (black probe)</th>
+      <th>Expected</th>
+      <th>Measured</th>
+      <th>Status</th>    
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{signal_name}}</td>
+      <td>{{icds}}</td>
+      <td>{{from}}</td>
+      <td>{{to}}</td>
+      <td>{{{condition}}}</td>
+      <td><span class="ing-step-input-50">{{actual_value}}</span> {{{measured_unit}}}</td>
+      <td>{{verification_status}}</td>     
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/MANUAL_EIP}}
+    {{! ---------------------------------------------------- }}       
+    {{#ENVIRONMENT_MANUAL}}
+    <div class="ing-step-content">
+      <table class="ing-table ing-striped">
+      <tr>
+      <td class="ing-label">Venue Temperature (&#8451;)</td>
+      <td>{{{props.temperature.condition}}}</td>
+      <td class="actual-value"><div class="ing-step-input-50">{{props.temperature.actual_value}}</div></td>
+      <td>{{props.temperature.verification_status}}</td>       
+      </tr>
+      <tr>
+      <td class="ing-label">Venue Humidity (%)</td>
+      <td>{{{props.humidity.condition}}}</td>
+      <td class="actual-value"><div class="ing-step-input-50">{{props.humidity.actual_value}}</div></td>
+      <td>{{props.humidity.verification_status}}</td>     
+      </tr>
+      </table>
+    </div>
+    {{/ENVIRONMENT_MANUAL}}
+    {{! ---------------------------------------------------- }}       
+    {{#WAIT}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+        {{props.wait}}
+      </div>
+    </div>
+    {{/WAIT}}    
+    {{! ---------------------------------------------------- }}       
+    {{#GDS_MANUAL}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+        Default String to Command on: {{props.default_cmd_string}}
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Data Path</th>
+      <th>Session ID</th>
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{data_path}}</td>
+      <td><div class="ing-step-input-100">{{session_id}}</div></td>
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div>
+    {{/GDS_MANUAL}}    
+    {{! ---------------------------------------------------- }}       
+    {{#VENUE_CONFIG_MANUAL}}
+    <div class="ing-step-content">
+      <table class="ing-table ing-striped">
+      <tr>
+      <td class="ing-label">FSW Version</td>
+      <td><div class="ing-step-input-200">{{props.fsw_version}}</div></td>
+      </tr>
+      <tr>
+      <td class="ing-label">SSE Version</td>
+      <td><div class="ing-step-input-200">{{props.sse_version}}</div></td>
+      </tr>
+      <tr>
+      <td class="ing-label">FSW Dictionary</td>
+      <td><div class="ing-step-input-200">{{props.fsw_dictionary}}</div></td>
+      </tr>
+      <tr>
+      <td class="ing-label">SSE Dictionary</td>
+      <td><div class="ing-step-input-200">{{props.sse_dictionary}}</div></td>
+      </tr>
+      <tr>
+      <td class="ing-label">GDS Version</td>
+      <td><div class="ing-step-input-200">{{props.gds_version}}</div></td>
+      </tr>
+      </table>
+    </div>
+    {{/VENUE_CONFIG_MANUAL}}    
+    {{! ---------------------------------------------------- }}    
+    {{#MANUAL_VERIFICATION}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+        <div><span style="font-weight: bold;">Verification Text: </span> {{{props.verification_text}}}</div>
+        <div><span style="font-weight: bold;">Verification Status: </span> {{props.verification_status}}</div>
+      </div>
+    </div>
+    {{/MANUAL_VERIFICATION}}
+    {{! ---------------------------------------------------- }}
+    {{#TIME_REFERENCE}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+        <div><span style="font-weight: bold;">Name: </span> {{{props.name}}}</div>
+        <div><span style="font-weight: bold;">Time: </span> {{props.time_value}}</div>
+      </div>
+    </div>
+    {{/TIME_REFERENCE}}
+    {{! ---------------------------------------------------- }}      
+    {{#QUERY_EVR}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      <span class="inline-label">start time:</span>
+      <span>{{props.start_time}} 
+      {{#props.translated_start_time}}
+        ({{props.translated_start_time}})
+      {{/props.translated_start_time}}
+      </span>
+      <span class="inline-label">end time:</span>
+      <span>{{props.end_time}}
+      {{#props.translated_end_time}}
+        ({{props.translated_end_time}})
+      {{/props.translated_end_time}}
+      </span>
+      <span class="inline-label">duration:</span>
+      <span>{{props.duration}}</span>
+      <span class="inline-label">time type:</span>
+      <span>{{props.time_type}}</span>
+      <span class="inline-label">timeout:</span>
+      <span>{{props.timeout}} secs.</span>
+      </div>
+      
+      {{#props.entries}}
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>EVR Name</th>
+      <th>EVR ID</th>
+      <th>EVR Type</th>
+      <th>EVR Level</th>
+      <th>Message Filter</th>
+      <th>Condition</th>
+      <th>Status</th>     
+      </tr>
+      <tr>
+      <td>{{evr_name}}</td>
+      <td>{{evr_id}}</td>
+      <td>{{evr_type}}</td>
+      <td>{{evr_level}}</td>
+      <td>{{message_filter}}</td>
+      <td>{{{condition}}}</td>
+      <td>{{verification_status}}</td>    
+      </tr>
+      </table>
+      {{#evr_data.length}}
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>EVR ({{evr_data.length}} out of {{props.total_count}} found)</th>      
+      <th>EVR Level</th>
+      <th>ERT</th>
+      <th>Message</th>
+      </tr>      
+      {{#evr_data}}
+      <tr>
+      <td>{{evr_name}}</td>      
+      <td>{{evr_level}}</td>
+      <td>{{ert}}</td>
+      <td>{{evr_message}}</td>
+      </tr>
+      {{/evr_data}}
+      </table>
+      {{/evr_data.length}}
+      {{/props.entries}}      
+    </div>
+    {{#executed}}
+    <div class="ing-step-result">
+      <div class="ing-border">
+      <span class="inline-label">Venue Name:</span>
+      <span>{{props.venue_name}}</span>
+      <span class="inline-label">Venue AMPCS Address:</span>
+      <span>{{props.venue_ampcs_address}}</span>
+      </div>     
+    </div>
+    {{/executed}}
+    {{/QUERY_EVR}}    
+    {{! ---------------------------------------------------- }}
+    {{#WAIT_EVR}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      <span class="inline-label">start time:</span>
+      <span>{{props.start_time}}
+      {{#props.translated_start_time}}
+        ({{props.translated_start_time}})
+      {{/props.translated_start_time}}
+      </span>
+      <span class="inline-label">lookback:</span>
+      <span>{{props.lookback}} secs.</span>
+      <span class="inline-label">timeout:</span>
+      <span>{{props.timeout}} secs.</span>
+      </div>
+      {{#props.entries}}
+      <table class="ing-table ing-striped">
+      <tr>
+      <th class="width-30">EVR Name</th>
+      <th class="width-10">EVR ID</th>
+      <th class="width-10">EVR Type</th>
+      <th class="width-10">EVR Level</th>
+      <th class="width-20">Message Filter</th>
+      <th class="width-10">Condition</th>
+      <th class="width-10">Status</th>      
+      </tr>
+      <tr>
+      <td class="width-30">{{evr_name}}</td>
+      <td class="width-10">{{evr_id}}</td>
+      <td class="width-10">{{evr_type}}</td>
+      <td class="width-10">{{evr_level}}</td>
+      <td class="width-20">{{message_filter}}</td>
+      <td class="width-10">{{{condition}}}</td>
+      <td class="width-10">{{verification_status}}</td>     
+      </tr>
+      </table>
+      
+      {{#evr_data.length}}
+      <table class="ing-table ing-striped">
+      <tr>
+      <th class="width-30">EVR ({{evr_data.length}} out of {{total_count}} found)</th>
+      <th class="width-20">EVR Level</th>
+      <th class="width-20">ERT</th>
+      <th class="width-30">Message</th>
+      </tr>      
+      {{#evr_data}}
+      <tr>
+      <td class="width-30">{{evr_name}}</td>      
+      <td class="width-20">{{evr_level}}</td>
+      <td class="width-20">{{ert}}</td>
+      <td class="width-30">{{evr_message}}</td>
+      </tr>
+      {{/evr_data}}
+      </table>
+      {{/evr_data.length}}
+            
+      {{/props.entries}}
+    </div>
+    
+    {{#executed}}
+    <div class="ing-step-result">
+      <div class="ing-border">
+      <span class="inline-label">Venue Name:</span>
+      <span>{{props.venue_name}}</span>
+      <span class="inline-label">Venue AMPCS Address:</span>
+      <span>{{props.venue_ampcs_address}}</span>
+      </div>
+    </div>
+    {{/executed}}
+  
+    {{/WAIT_EVR}}    
+    {{! ---------------------------------------------------- }}
+    {{#VERIFY_EHA}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">start time:</span>
+      <span>{{props.start_time}}
+      {{#props.translated_start_time}}
+        ({{props.translated_start_time}})
+      {{/props.translated_start_time}}
+      </span>
+      <span class="inline-label">lookback:</span>
+      <span>{{props.lookback}} secs.</span>
+      <span class="inline-label">timeout:</span>
+      <span>{{props.timeout}} secs.</span>
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Data Path</th>
+      <th>Channel Name</th>
+      <th>Channel ID</th>
+      <th>Channel Type</th>
+      <th>DN/EU</th>
+      <th>Condition</th>
+      <th>Value</th>
+      <th>Status</th>   
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{data_path}}</td>
+      <td>{{channel_name}}</td>
+      <td>{{channel_id}}</td>
+      <td>{{channel_type}}</td>
+      <td>{{dn_eu}}</td>
+      <td>{{{condition}}}</td>
+      <td>{{{display_value}}}</td>
+      <td>{{verification_status}}</td>
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/VERIFY_EHA}}    
+    {{! ---------------------------------------------------- }}
+    {{#WAIT_EHA}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">start time:</span>
+      <span>{{props.start_time}}
+      {{#props.translated_start_time}}
+        ({{props.translated_start_time}})
+      {{/props.translated_start_time}}
+      </span>
+      <span class="inline-label">lookback:</span>
+      <span>{{props.lookback}} secs.</span>
+      <span class="inline-label">timeout:</span>
+      <span>{{props.timeout}} secs.</span>
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Data Path</th>
+      <th>Channel Name</th>
+      <th>Channel ID</th>
+      <th>Channel Type</th>
+      <th>DN/EU</th>
+      <th>Condition</th>
+      <th>Value</th>
+      <th>Status</th>   
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{data_path}}</td>
+      <td>{{channel_name}}</td>
+      <td>{{channel_id}}</td>
+      <td>{{channel_type}}</td>
+      <td>{{dn_eu}}</td>
+      <td>{{{condition}}}</td>
+      <td>{{{display_value}}}</td>
+      <td>{{verification_status}}</td>   
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/WAIT_EHA}}
+    {{! ---------------------------------------------------- }}
+    {{#BUS_1553}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">start time:</span>
+      <span>{{props.start_time}}
+      {{#props.translated_start_time}}
+        ({{props.translated_start_time}})
+      {{/props.translated_start_time}}
+      </span>
+      <span class="inline-label">lookback:</span>
+      <span>{{props.lookback}} secs.</span>
+      <span class="inline-label">time type:</span>
+      <span>{{props.time_type}}</span>        
+      <span class="inline-label">timeout:</span>
+      <span>{{props.timeout}} secs.</span>    
+      <span class="inline-label">verify/wait:</span>
+      <span>{{props.verify_wait}}</span> 
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>1553 Variable</th>
+      <th>Raw/Converted</th>
+      <th>Condition</th>
+      <th>Value</th>
+      <th>Status</th>   
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{bus_1553_var}}</td>
+      <td>{{raw_convert}}</td>
+      <td>{{{condition}}}</td>
+      <td>{{{actual_value}}}</td>
+      <td>{{verification_status}}</td>
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/BUS_1553}}      
+    {{! ---------------------------------------------------- }}
+    {{#LIST_DATA_PRODUCTS}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      <span class="inline-label">start time:</span>
+      <span>{{props.start_time}}
+      {{#props.translated_start_time}}
+        ({{props.translated_start_time}})
+      {{/props.translated_start_time}}
+      </span>
+      <span class="inline-label">end time:</span>
+      <span>{{props.end_time}}
+      {{#props.translated_end_time}}
+        ({{props.translated_end_time}})
+      {{/props.translated_end_time}}
+      </span>
+      <span class="inline-label">duration:</span>
+      <span>{{props.duration}}</span>
+      <span class="inline-label">time type:</span>
+      <span>{{props.time_type}}</span>
+      <span class="inline-label">timeout:</span>
+      <span>{{props.timeout}} secs.</span>
+      </div>
+
+      {{#props.entries}}
+      
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>APID</th>
+      <th>Product Status</th>
+      <th>Condition</th>
+      <th>Status</th>      
+      </tr>      
+      <tr>
+      <td>{{apid}}</td>
+      <td>{{product_status_filter}}</td>
+      <td>{{{condition}}}</td>
+      <td>{{verification_status}}</td>
+      </tr>
+      </table>
+      
+      {{#products.length}}
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>APID</th>
+      <th>Product Type</th>
+      <th>ERT</th>
+      <th>Size</th>
+      <th>File Path</th>
+      </tr>      
+      {{#products}}
+      <tr>
+      <td>{{apid}}</td>      
+      <td>{{apid_product_type}}</td>
+      <td>{{ert}}</td>
+      <td>{{file_size}}</td>
+      <td class="ing-wrap">{{file_path}}</td>
+      </tr>
+      {{/products}}
+      </table>
+      {{/products.length}}
+      
+      {{/props.entries}}
+    </div> 
+    {{/LIST_DATA_PRODUCTS}}      
+    {{! ---------------------------------------------------- }}     
+    {{#WAIT_DATA_PRODUCTS}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      <span class="inline-label">start time:</span>
+      <span>{{props.start_time}}
+      {{#props.translated_start_time}}
+        ({{props.translated_start_time}})
+      {{/props.translated_start_time}}
+      </span>
+      <span class="inline-label">lookback:</span>
+      <span>{{props.lookback}}</span>
+      <span class="inline-label">timeout:</span>
+      <span>{{props.timeout}} secs.</span>
+      </div>
+
+      {{#props.entries}}
+      
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>APID</th>
+      <th>Product Status</th>
+      <th>Condition</th>
+      <th>Status</th>   
+      </tr>      
+      <tr>
+      <td>{{apid}}</td>
+      <td>{{product_status_filter}}</td>
+      <td>{{{condition}}}</td>
+      <td>{{verification_status}}</td>   
+      </tr>
+      </table>      
+      
+      {{#products.length}}
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>APID</th>
+      <th>Product Type</th>
+      <th>ERT</th>
+      <th>Size</th>
+      <th>File Path</th>
+      </tr>      
+      {{#products}}
+      <tr>
+      <td>{{apid}}</td>      
+      <td>{{apid_product_type}}</td>
+      <td>{{ert}}</td>
+      <td>{{file_size}}</td>
+      <td class="ing-wrap">{{file_path}}</td>
+      </tr>
+      {{/products}}
+      </table>
+      {{/products.length}}
+      
+      {{/props.entries}}
+    </div> 
+    {{/WAIT_DATA_PRODUCTS}}      
+    {{! ---------------------------------------------------- }}
+    {{#CMD}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>FSW/HW</th>
+      <th>Command String</th>
+      <th>Timeout</th>
+      <th>String to Command</th>   
+      <th>Verify</th>
+      <th>Radiated</th>
+      <th>Verified</th>
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{hw_fsw}}</td>
+      <td>{{cmd_string}}</td>
+      <td>{{timeout}}</td>
+      <td>{{string_selection}}</td>  
+      <td>{{verify}}</td>
+      <td>{{radiated}}</td>  
+      <td>{{verified}}</td>  
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/CMD}}      
+    {{! ---------------------------------------------------- }}    
+    {{#CMD_SSE}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Command String</th>
+      <th>Timeout</th>
+      <th>Radiated</th>        
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{cmd_string}}</td>
+      <td>{{timeout}}</td>
+      <td>{{radiated}}</td>   
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/CMD_SSE}}      
+    {{! ---------------------------------------------------- }}      
+    {{#CMD_FILE}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>File Type</th>
+      <th>File Path</th>
+      <th>Onboard Path</th>
+      <th>Overwrite</th>
+      <th>Timeout</th>
+      <th>String to Command</th>
+      <th>Verify</th>
+      <th>Verified</th>
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{file_type}}</td>
+      <td class="ing-wrap">{{file_path}}</td>
+      <td class="ing-wrap">{{onboard_path}}</td>
+      <td>{{overwrite}}</td>
+      <td>{{timeout}}</td>
+      <td>{{string_selection}}</td> 
+      <td>{{verify}}</td>
+      <td>{{verified}}</td>
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/CMD_FILE}}      
+    {{! ---------------------------------------------------- }}        
+    {{#CMD_SCMF}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">data path:</span>
+      <span>{{props.data_path}}</span>
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>File Type</th>
+      <th>File Path</th>
+      <th>Disable Checks</th>
+      <th>Timeout</th>
+      <th>Verify</th>
+      <th>Verified</th>   
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{file_type}}</td>
+      <td class="ing-wrap">{{file_path}}</td>
+      <td>{{disable_checks}}</td>
+      <td>{{timeout}}</td>
+      <td>{{verify}}</td>
+      <td>{{verified}}</td>      
+      </tr>
+      {{/props.entries}}
+      </table>
+    </div> 
+    {{/CMD_SCMF}}      
+    {{! ---------------------------------------------------- }}    
+    {{#CUSTOM_SCRIPT}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">Script Name:</span>
+      <span>{{props.script_name}}</span>
+      <span class="inline-label">Script Path:</span>
+      <span>{{props.script_path}}</span>
+      <span class="inline-label">Description:</span>
+      <span>{{props.description}}</span>
+      <span class="inline-label">Hash:</span>
+      <span>{{props.hash}}</span>
+      <span class="inline-label">Status:</span>
+      <span>{{props.status}}</span>
+      <span class="inline-label">Timeout:</span>
+      <span>{{props.timeout}}</span>                              
+      </div>
+      
+      {{#props.inputs.length}}
+      <div class="ing-label">Inputs:</div>
+      <table class="ing-table ing-striped" style="word-break: break-all;">
+      <tr>
+      <th>Name</th>
+      <th>Value</th>
+      </tr>
+      {{#props.inputs}}
+      <tr>
+      <td>{{name}}</td>
+      <td>{{value}}</td>
+      </tr>
+      {{/props.inputs}}
+      </table>
+      {{/props.inputs.length}}
+      
+      
+      {{#props.entries.length}}
+      <div class="ing-label">Entries:</div>
+      {{#props.entries}}
+      <table class="ing-table ing-striped" style="word-break: break-all;">
+      <tr>
+      {{#entry_inputs}}
+      <th>{{name}}</th>
+      {{/entry_inputs}}
+      {{#entry_outputs}}
+      {{#show_in_pdf}}
+      <th>{{name}}</th>
+      {{/show_in_pdf}}
+      {{/entry_outputs}}
+      <th>Status</th>      
+      </tr>
+      <tr>
+      {{#entry_inputs}}
+      <td>{{value}}</td>
+      {{/entry_inputs}}
+      {{#entry_outputs}}
+      {{#show_in_pdf}}
+      <td>{{value}}</td>
+      {{/show_in_pdf}}
+      {{/entry_outputs}}      
+      <td>{{verification_status}}</td>
+      </tr>
+      </table>
+      
+      {{#entry_output_array.outputs.length}}
+      <table class="ing-table ing-striped" style="word-break: break-all;">
+      <tr>
+      {{#entry_output_array.outputs}}
+      {{#show_in_pdf}}
+      <th>{{name}}</th>
+      {{/show_in_pdf}}
+      {{/entry_output_array.outputs}}
+      </tr>
+      {{#entry_output_array.rows}}
+      <tr>
+      {{#.}}
+      <td>{{.}}</td>
+      {{/.}}
+      </tr>
+      {{/entry_output_array.rows}}
+      </table>
+      {{/entry_output_array.outputs.length}}
+      {{/props.entries}}
+      {{/props.entries.length}}
+      
+      
+      {{#props.outputs.length}}
+      <div class="ing-label">Outputs:</div>
+      <table class="ing-table ing-striped" style="word-break: break-all;">
+      <tr>
+      <th>Name</th>
+      <th>Value</th>
+      </tr>
+      {{#props.outputs}}
+      <tr>
+      <td>{{name}}</td>
+      <td>{{value}}</td>
+      </tr>
+      {{/props.outputs}}
+      </table>
+      {{/props.outputs.length}}
+      
+      {{#props.output_array.outputs.length}}
+      <div class="ing-label">Output Array:</div>
+      <table class="ing-table ing-striped" style="word-break: break-all;">
+      <tr>
+      {{#props.output_array.outputs}}
+      {{#show_in_pdf}}
+      <th>{{name}}</th>
+      {{/show_in_pdf}}
+      {{/props.output_array.outputs}}
+      </tr>
+      {{#props.output_array.rows}}
+      <tr>
+      {{#.}}
+      <td>{{.}}</td>
+      {{/.}}
+      </tr>
+      {{/props.output_array.rows}}
+      </table>
+      {{/props.output_array.outputs.length}}      
+
+    </div> 
+    {{/CUSTOM_SCRIPT}}      
+    {{! ---------------------------------------------------- }}   
+    {{#VERIFICATION_ITEM}}
+    <div class="ing-step-content">      
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Type</th>
+      <th>VI ID</th>
+      <th>Name</th>
+      <th>Text</th>
+      <th>Owner</th>
+      <th>Additional Procedures</th>
+      </tr>
+      {{#props.vis}}
+      <tr>
+      <td>{{vi_type}}</td>
+      <td>{{vi_id}}</td>
+      <td>{{vi_name}}</td>
+      <td>{{vi_text}}</td>
+      <td>{{vi_owner}}</td>
+      <td>{{vi_additional_procs}}</td>
+      </tr>
+      {{/props.vis}}      
+      </table>
+    </div> 
+    {{/VERIFICATION_ITEM}}  
+    {{! ---------------------------------------------------- }}   
+    {{#VERIFICATION_ITEM_STATUS}}
+    <div class="ing-step-content">      
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>VI</th>
+      <th>Steps</th>
+      </tr>
+      <tr>
+      <td>
+      {{#props.vis}}
+      <div>{{vi_id}}: {{vi_name}}</div>
+      {{/props.vis}}
+      </td>
+      <td>
+      {{#props.steps}}
+      <div>{{number}}: {{title}} {{#status}}({{.}}){{/status}}</div>
+      {{/props.steps}}      
+      </td>
+      </tr>     
+      </table>
+    </div> 
+    {{/VERIFICATION_ITEM_STATUS}}         
+    {{! ---------------------------------------------------- }}       
+    {{#VENUE_CONFIG_GET}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">Get All:</span>
+      <span>{{props.get_all}}</span>                           
+      </div>
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Element Name</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Serial</th>
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{config_elem_name}}</td>
+      <td>{{type}}</td>
+      <td>{{status}}</td>
+      <td>{{serial}}</td>
+      </tr>
+      {{/props.entries}}
+      </table>      
+    </div> 
+    {{/VENUE_CONFIG_GET}}      
+    {{! ---------------------------------------------------- }}      
+    {{#VENUE_CONFIG_UPDATE}}
+    <div class="ing-step-content">
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Element Name</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Serial Number</th>
+      <th>Notes</th>
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{config_elem_name}}</td>
+      <td>{{type}}</td>
+      <td>{{status}}</td>
+      <td>{{serial}}</td>
+      <td>{{notes}}</td>
+      </tr>
+      {{/props.entries}}
+      </table>      
+    </div> 
+    {{/VENUE_CONFIG_UPDATE}}      
+    {{! ---------------------------------------------------- }}
+    {{#VENUE_CONFIG_CHECK}}
+    <div class="ing-step-content">
+      <table class="ing-table ing-striped">
+      <tr>
+      <th>Element Name</th>
+      <th>Field Name</th>
+      <th>Condition</th>
+      <th>Value</th>
+      <th>Status</th>
+      </tr>
+      {{#props.entries}}
+      <tr>
+      <td>{{config_elem_name}}</td>
+      <td>{{field_name}}</td>
+      <td>{{{condition}}}</td>
+      <td>{{actual_value}}</td>  
+      <td>{{verification_status}}</td>       
+      </tr>
+      {{/props.entries}}
+      </table>      
+    </div> 
+    {{/VENUE_CONFIG_CHECK}}      
+    {{! ---------------------------------------------------- }}    
+    {{#PROCEDURE_SECTION}}
+    <div class="ing-step-content">
+      <div class="ing-border">
+      <span class="inline-label">ID:</span>
+      <span>{{props.reference_procedure_id}}</span>
+      <span class="inline-label">Title:</span>
+      <span>{{props.reference_procedure_title}}</span>
+      <span class="inline-label">Version:</span>
+      <span>{{props.reference_procedure_version}}</span> 
+      <span class="inline-label">Create Execution:</span>
+      <span>{{props.callable}}</span>
+      {{#props.callable}}
+      <span class="inline-label">Execution:</span>
+      <span>{{props.child_execution_id}}</span>
+      {{/props.callable}}      
+      <span class="inline-label">Selected Tags:</span>
+      <span>{{props.selected_tag_names}}</span>                              
+      </div>
+    </div> 
+    {{/PROCEDURE_SECTION}}      
+    {{! ---------------------------------------------------- }} 
+    
+    {{#procedure_title}}    
+    <div class="ing-step-proc">
+    {{/procedure_title}}
+    {{#run_for_record}}    
+    <span class="ing-r4r">R4R</span>
+    {{/run_for_record}}   
+    {{#procedure_title}}    
+    <span class="ing-proc-title">{{.}}</span>
+    {{/procedure_title}}       
+    {{#procedure_modification.justification.modification_type}}    
+    <span class="ing-{{.}}">{{.}}</span>
+    {{/procedure_modification.justification.modification_type}} 
+         
+    {{#procedure_modification.justification}}
+    <p>
+    Justification (Updated: {{time_updated}} By: {{user_name}})
+    </p>
+    
+    <p class="ing-justification">
+    {{{content}}}&nbsp;
+    </p>
+    {{/procedure_modification.justification}}
+    
+    {{#procedure_modification.approval}}
+    <p>
+    Approval Status: {{status}} (Updated: {{time_updated}} By: {{user_name}})
+    </p>
+    
+    <p class="ing-approval">
+    {{{content}}}&nbsp;
+    </p>
+    {{/procedure_modification.approval}}    
+    
+    {{#procedure_title}}    
+    </div>
+    {{/procedure_title}}      
+    
+    {{! -----------  }}
+    
+    {{#message.length}}    
+    <div class="ing-step-error">
+    <p>Error: {{message}}</p>
+    
+    {{#details}}
+    <p>
+    {{.}}
+    </p>    
+    {{/details}}  
+    
+    </div>
+    {{/message.length}}
+    
+    {{#conversations}}
+    {{#included}}
+    <div class="{{type_class}}">
+      <div class="{{type_class}}-head">
+        <span>{{type_name}}</span>
+        <span class="margin-left-5">{{status}}</span>
+        {{#resolved}}
+        <span class="margin-left-5">By:</span>
+        <span  class="margin-left-2">{{resolved_by}}</span>        
+        <span class="margin-left-5">At:</span>
+        <span class="margin-left-2">{{time_resolved}}</span>
+
+        {{/resolved}}
+      </div>
+      
+      {{#comments}}
+      <div class="ing-comment">
+        <div class="ing-comment-head">
+          <span class="inline-label">{{user_name}}</span>
+          <span class="margin-left-3">{{time_updated}}</span>    
+        </div>
+
+        <div class="ing-description">
+        <p class="froala-non-edit">
+          <div class="fr-view">
+            {{{content}}}
+          </div>
+        </p>
+        </div>
+      </div>
+      {{/comments}}
+    </div>
+    {{/included}}
+    {{/conversations}}
+         
+    </div>                  
+    {{/elements}}    
+  </body>
+</html>
