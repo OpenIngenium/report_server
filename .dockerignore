@@ -1,0 +1,4 @@
+image/data
+image/node_modules
+server/node_modules
+server/services/pdf/node_modules
